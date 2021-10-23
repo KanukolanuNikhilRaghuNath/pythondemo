@@ -1,55 +1,27 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+trigger:
+- main
 
- trigger:
-
-
- - master 
-
-
- pool:
-
-  vmImage: 'ubuntu-latest'
-
- strategy:
-
+pool:
+  vmImage: ubuntu-latest
+strategy:
   matrix:
-
-   python 39:
-
-   python.version: '3.9'
-
- steps :
+    Python39:
+      python.version: '3.9'
 
 
-  - task: UsePythonVersion@0
- 
-    
-  
-    inputs:
-  
-    versionSpec: '$(python.version)'displayName: 
-  
-   'Use Python $(python.version)'
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
 
-   -script: python "sum.py"
+- script: python "sum.py"
 
-   -task: Pythonscript@0
-inputs:
+- task: PythonScript@0
+  inputs:
 
+    scriptSource: 'inline'
 
-     scriptSource: 'inline'
-
-  
-  
-       script:
-
-print("This is Section 2 Azure Demonstration")
-    
-    
-  print("KL-CSE")
-  
-  
-
+    script:
+     print('This is python application from azure platform')
+     print('190030849')
